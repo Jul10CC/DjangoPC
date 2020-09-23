@@ -1,40 +1,16 @@
-<!doctype html>
-<html lang="en">
-    <header>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600i,700&display=swap" rel="stylesheet">
-     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-     <!--Bootstrap CSS-->    
-    <head>
-        <br>
-        <title>Django Girls blog</title>
-    </head>
-    <style>
-          .italic {
-        font-style: italic;
-        font-weight: bold;
-        color: darkgreen;
-    }
-    </style>
-    <body>
-        <br>
-        <div>
-            <h1><a class="italic" href="/">Django Girls Blog</a></h1>
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% for publicacion in publicaciones%}
+                <div class="post">
+                    <p>Publicado: {{ publicacion.fecha_publicacion }}</p>
+                    <h2><a href="{% url 'detalle_publicacion' pk=publicacion.pk %}">{{ publicacion.titulo }}</a></h2>
+                    <p>{{ publicacion.texto|linebreaksbr }}</p>
+                </div>
+            {% endfor %}
         </div>
-        {% for publicacion in publicaciones%}
-        <div >
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-success">Autor: {{publicacion.autor}}</li>
-                <li class="list-group-item">Titulo: {{publicacion.titulo}}</li>
-                <li class="list-group-item">Texto: {{publicacion.texto}}</li>
-                <li class="list-group-item">Fecha Creacion: {{publicacion.fecha_creacion}}</li>
-                <li class="list-group-item">Fecha Publicacion: {{publicacion.fecha_publicacion }}</li>
-              </ul>
-        </div>
-        {% endfor %}
-        
-    </body>
-</html>
+    </div>
+</div>
+{% endblock %}
