@@ -1,29 +1,36 @@
 <!doctype html>
 {% load static %}
 <html lang="en">
-    <header>
+<header>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-     <!--Bootstrap CSS-->    
-        <div >
-            <title>Django Girls blog</title>
-        </div>  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--Bootstrap CSS-->
+    <div>
+        <title>Django Girls blog</title>
+    </div>
+
     <body>
         <br>
         <div class="page-header">
-        {% if user.is_authenticated %}
-            <a href="{% url 'publicacion_nueva' %}" class="top-menu"><span class="fa fa-plus"></span></a>
-        {% endif %}
-            <h1><a class="italic" href="/">Django Girls Blog</a></h1>
+            {% if user.is_authenticated %}
+                <a href="{% url 'publicacion_borrador_lista' %}" class="top-menu"><span class="fa fa-edit"></span></a>
+                <a href="{% url 'publicacion_nueva' %}" class="top-menu"><span class="fa fa-plus"></span></a>
+                <p class="top-menu">Hola {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu"><span class="fa fa-lock"></span></a>
+            {% endif %}
+            <h1><a class="italic" href="/">Django Girls Blog - Julio Cayax</a></h1>
         </div>
         {% block content %}
         {% endblock %}
     </body>
+
 </html>
